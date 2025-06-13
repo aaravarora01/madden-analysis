@@ -253,15 +253,15 @@ for (year in training_years) {
     group_by(Team) %>%
     nest() %>%
     mutate(
-      top_QB = map(data, ~get_top_players(.x, "QB", 1)),     # QB: top 1, concatenate name and rating
-      top_RB = map(data, ~get_top_players(.x, "HB", 1)),     # RB: top 1, concatenate name and rating
-      top_WR = map(data, ~get_top_players_avg(.x, "WR", 2)), # WR: top 2, average Overall
-      top_TE = map(data, ~get_top_players_avg(.x, "TE", 2)), # TE: top 2, average Overall
-      top_OLine = map(data, ~get_top_oline(.x, 5)),          # OLine: top 5, average Overall
-      top_DLine = map(data, ~get_top_dline_avg(.x, 5)),      # DLine: top 5, average Overall
-      top_LB = map(data, ~get_top_lb_avg(.x, 2)),            # LB: top 2, average Overall
-      top_DB = map(data, ~get_top_db_avg(.x, 4)),            # DB: top 4, average Overall
-      wins = map_dbl(data, ~first(.x$wins))                  # Extract the wins column
+      top_QB = map(data, ~get_top_players(.x, "QB", 1)),
+      top_RB = map(data, ~get_top_players(.x, "HB", 1)),
+      top_WR = map(data, ~get_top_players_avg(.x, "WR", 2)),
+      top_TE = map(data, ~get_top_players_avg(.x, "TE", 2)),
+      top_OLine = map(data, ~get_top_oline(.x, 5)),
+      top_DLine = map(data, ~get_top_dline_avg(.x, 5)),
+      top_LB = map(data, ~get_top_lb_avg(.x, 2)),
+      top_DB = map(data, ~get_top_db_avg(.x, 4)),
+      wins = map_dbl(data, ~first(.x$wins))
     ) %>%
     unnest(c(top_QB, top_RB, top_WR, top_TE, top_OLine, top_DLine, top_LB, top_DB), names_sep = "_") %>%
     select(-data)
@@ -289,15 +289,15 @@ test_result <- player_df %>%
   group_by(Team) %>%
   nest() %>%
   mutate(
-    top_QB = map(data, ~get_top_players(.x, "QB", 1)),     # QB: top 1, concatenate name and rating
-    top_RB = map(data, ~get_top_players(.x, "HB", 1)),     # RB: top 1, concatenate name and rating
-    top_WR = map(data, ~get_top_players_avg(.x, "WR", 2)), # WR: top 2, average Overall
-    top_TE = map(data, ~get_top_players_avg(.x, "TE", 2)), # TE: top 2, average Overall
-    top_OLine = map(data, ~get_top_oline(.x, 5)),          # OLine: top 5, average Overall
-    top_DLine = map(data, ~get_top_dline_avg(.x, 5)),      # DLine: top 5, average Overall
-    top_LB = map(data, ~get_top_lb_avg(.x, 2)),            # LB: top 2, average Overall
-    top_DB = map(data, ~get_top_db_avg(.x, 4)),            # DB: top 4, average Overall
-    wins = map_dbl(data, ~first(.x$wins))                  # Extract the wins column
+    top_QB = map(data, ~get_top_players(.x, "QB", 1)),
+    top_RB = map(data, ~get_top_players(.x, "HB", 1)),
+    top_WR = map(data, ~get_top_players_avg(.x, "WR", 2)),
+    top_TE = map(data, ~get_top_players_avg(.x, "TE", 2)),
+    top_OLine = map(data, ~get_top_oline(.x, 5)),
+    top_DLine = map(data, ~get_top_dline_avg(.x, 5)),
+    top_LB = map(data, ~get_top_lb_avg(.x, 2)),
+    top_DB = map(data, ~get_top_db_avg(.x, 4)),
+    wins = map_dbl(data, ~first(.x$wins))
   ) %>%
   unnest(c(top_QB, top_RB, top_WR, top_TE, top_OLine, top_DLine, top_LB, top_DB), names_sep = "_") %>%
   select(-data)
