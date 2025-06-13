@@ -6,7 +6,7 @@ DlineStats <- read.csv("/Users/aarav/Downloads/Data/dline.csv")
 MaddenRatings <- read.csv("/Users/aarav/Downloads/Data/madden25.csv")
 
 MaddenRatings$Player <- paste(MaddenRatings$firstName, MaddenRatings$lastName, sep = " ")
-DlineStats$Player <- DlineStats$Player  # assume full names present
+DlineStats$Player <- DlineStats$Player
 
 FullDline <- left_join(DlineStats, MaddenRatings, by = "Player")
 
